@@ -1,0 +1,7 @@
+{
+  "name": "gainzope",
+  "private": true,
+  "scripts": {
+    "build": "cd gainzope-site && npm install && npm run build"
+  }
+}
