@@ -2,7 +2,7 @@ name = "gainzope"
 compatibility_date = "2024-09-23"
 
 [build]
-command = "cd gainzope-site && npm install && npm run build"
+command = "cd gainzope-site && npm install && npm run build && rm -f dist/_redirects"
 
 [assets]
 directory = "./gainzope-site/dist"
