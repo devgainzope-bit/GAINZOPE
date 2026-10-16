@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js';
 
-const API_BASE_URL = 'http://localhost:4000';
+const API_BASE_URL = (window.__GAINZOPE_API_URL__ || localStorage.getItem('GAINZOPE_API_URL') || (window.location.hostname === 'localhost' ? 'http://localhost:4000' : '')).replace(/\/$/, '');
 const firebaseConfig = {
   apiKey: 'AIzaSyC8gFmHj7ZG8VmCiwg84Skubtw-alPMJqU',
   authDomain: 'gainzope-c579f.firebaseapp.com',
