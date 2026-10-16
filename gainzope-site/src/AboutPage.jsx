@@ -52,7 +52,7 @@ export default function AboutPage({ onBackToHome }) {
         'Daily Free Spin with IST midnight reset',
         'High-yield CPX Research paid surveys',
         'Verified action task and offer walls',
-        'Referral engine with milestone rewards (15, 25, 50 friends)',
+        'Referral engine with milestone rewards (10, 25, 50 friends)',
         'Hindi and English bilingual interface'
       ]
     },

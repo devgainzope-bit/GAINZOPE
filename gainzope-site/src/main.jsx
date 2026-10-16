@@ -28,7 +28,7 @@ const earningWays = [
   ['02', 'Available surveys', 'Answer high-yield CPX Research surveys matched to your profile. Rewards are shown before you begin.', 'Survey'],
   ['03', 'Verified tasks', 'Complete listed steps and partner offers. Eligible completions move directly to your points balance.', 'Task'],
   ['04', 'Gift cards & offers', 'Choose an offer or redeem your tokens for brand gift cards like Amazon, Flipkart and Google Play.', 'Offer'],
-  ['05', 'Refer & milestones', 'Get 500 points when your friend finishes their first task, plus huge bonus points at 15, 25 and 50 referrals.', 'Invite']
+  ['05', 'Refer & milestones', 'Get 500 points when your friend finishes their first task, plus huge bonus points at 10, 25 and 50 referrals.', 'Invite']
 ];
 
 const faqs = [
@@ -36,7 +36,7 @@ const faqs = [
   ['How do GAINZOPE points convert to tokens and rupees?', 'The value rule is 100% transparent: 100 points = 1 GAINZOPE token. 1 token gives ₹1 of real redemption value. There are no hidden fees or surprise deductions.'],
   ['How do VIP Loyalty Tiers and recharge discounts work?', 'As you earn points and participate, your loyalty tier automatically rises: Bronze Level gives a 5% discount on eligible mobile recharges, Silver Level gives 8%, Gold Level gives 12%, and Platinum Level gives up to 15% discount. This percentage discount is combined with your tokens to significantly slash your recharge cost.'],
   ['Which Indian mobile operators are supported for recharge discounts?', 'GAINZOPE supports all major Indian mobile telecom networks: Reliance Jio, Bharti Airtel, Vodafone Idea (Vi), and BSNL across prepaid plans.'],
-  ['What are referral milestones and how much can I earn?', 'When your invited friend completes their first valid task, you receive 500 points and your friend receives 200 points. In addition, milestone bonuses are unlocked: 15 successful referrals gives +2,000 bonus points, 25 referrals gives +3,500 bonus points, and 50 referrals gives +10,000 bonus points.'],
+  ['What are referral milestones and how much can I earn?', 'When your invited friend completes their first valid task, you receive 500 points and your friend receives 200 points. In addition, milestone bonuses are unlocked: 10 successful referrals gives +1,500 bonus points, 25 referrals gives +5,000 bonus points, and 50 referrals gives +15,000 bonus points.'],
   ['How does the daily lucky spin and mystery box work?', 'Every verified GAINZOPE account gets one free lucky spin every single day, resetting at midnight IST. Reaching streaks and completing tasks also awards bonus spins and mystery box drops containing extra points and perks.'],
   ['How do CPX Research paid surveys work?', 'GAINZOPE connects with CPX Research to offer paid surveys tailored for Indian audiences. You will always see the reward value in points and the estimated survey duration before starting.'],
   ['Can I redeem points for gift cards like Amazon or Flipkart?', 'Yes! In addition to mobile recharge discounts, GAINZOPE features an active catalogue of digital gift cards, including Amazon Pay vouchers, Flipkart shopping cards, and Google Play recharge codes.'],
@@ -389,7 +389,7 @@ function HomeAboutIntro({ onNavigateAbout }) {
 
 
 function ReferralRewards() {
-  const milestones = [['15', '2,000 points'], ['25', '3,500 points'], ['50', '10,000 points']];
+  const milestones = [['10', '1,500 points'], ['25', '5,000 points'], ['50', '15,000 points']];
   return <section className="referralSection"><div className="shell referralGrid"><Reveal><p className="kicker">03 / REFER & EARN</p><h2>Invite a friend.<br /><em>Unlock points together.</em></h2><p>Share your referral code. When your friend completes their first valid task, GAINZOPE credits a reward to both accounts.</p><div className="referralSplit"><div><small>YOUR REWARD</small><strong>500 <i>PTS</i></strong></div><div><small>FRIEND'S REWARD</small><strong>200 <i>PTS</i></strong></div></div><p className="referralFine">A referral counts only after that first task is verified. Up to 10 successful referrals can count in one day.</p></Reveal><Reveal delay={.12} className="milestoneBoard"><div className="milestoneHead"><span>REFERRAL MILESTONES</span><b>EXTRA POINTS</b></div>{milestones.map(([count, points], index) => <motion.div key={count} className="milestoneRow" whileHover={{ x: 7 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }}><span>0{index + 1}</span><strong><b>{count}</b> successful referrals</strong><em>+ {points}</em></motion.div>)}<div className="milestoneFoot"><span>DAILY LIMIT</span><b>10 REFERRALS</b></div></Reveal></div></section>;
 }
 
