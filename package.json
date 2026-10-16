@@ -3,5 +3,8 @@
   "private": true,
   "scripts": {
     "build": "cd gainzope-site && npm install && npm run build"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.0"
   }
 }
