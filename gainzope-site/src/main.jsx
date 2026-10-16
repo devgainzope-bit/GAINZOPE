@@ -296,7 +296,7 @@ function Nav({ currentPath, onNavigate }) {
                 </a>
 
                 <div className="mobileMenuFooter">
-                  <span>🇮🇳 HINDI + ENGLISH</span>
+                  <span>🇮🇳 ENGLISH (INDIA)</span>
                   <a href="mailto:support.gainzope@gmail.com">support.gainzope@gmail.com ↗</a>
                 </div>
               </div>
@@ -882,7 +882,7 @@ function Download() {
         <Reveal>
           <p className="kicker">13 / THE GAINZOPE APP</p>
           <h2>GAINZOPE for<br /><em>Android is coming soon.</em></h2>
-          <p>Launch with your Indian mobile number, choose Hindi or English, and keep track of activities, points, tokens and eligible rewards in one place.</p>
+          <p>Sign in with your Indian mobile number and easily keep track of your activities, points, tokens and eligible rewards in one place.</p>
           <span className="comingButton">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" className="playSymbol">
               <path d="M3.6 2.4c-.4.4-.6 1-.6 1.8v15.6c0 .8.2 1.4.6 1.8L12.5 12 3.6 2.4z" fill="#00D2FF" />
@@ -909,7 +909,7 @@ function Download() {
               <path d="M49 28h-9a9 9 0 0 0-9 9v14a9 9 0 0 0 9 9h9a9 9 0 0 0 9-9v-5h-10" stroke="#c8ff00" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </motion.div>
-          <span>INDIA ONLY · HINDI + ENGLISH<br />LAUNCH UPDATES COMING SOON</span>
+          <span>INDIA ONLY · ENGLISH INTERFACE<br />LAUNCH UPDATES COMING SOON</span>
         </Reveal>
       </div>
     </section>

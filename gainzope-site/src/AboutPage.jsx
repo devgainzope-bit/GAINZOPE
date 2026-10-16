@@ -53,7 +53,7 @@ export default function AboutPage({ onBackToHome }) {
         'High-yield CPX Research paid surveys',
         'Verified action task and offer walls',
         'Referral engine with milestone rewards (10, 25, 50 friends)',
-        'Hindi and English bilingual interface'
+        'Clean, modern English interface'
       ]
     },
     {
@@ -97,7 +97,7 @@ export default function AboutPage({ onBackToHome }) {
       items: [
         'DTH recharge discounts (Tata Play, Airtel DTH, Dish TV)',
         'Electricity and broadband bill payment savings',
-        'Vernacular language rollout (Tamil, Telugu, Bangla, Marathi)',
+        'Regional platform expansion and enhanced rewards',
         'GAINZOPE iOS app for iPhone users',
         'Direct merchant discount partnerships'
       ]
