@@ -871,8 +871,12 @@ function SubscribeSection() {
   );
 }
 
-function TrustAndSupport() {
-  return <section className="trustSection"><div className="shell"><Reveal className="trustHead"><div><p className="kicker">11 / RULES & SUPPORT</p><h2>Read the rules.<br /><em>Then earn with confidence.</em></h2></div><p>Keep the important information close: how points work, how spin rewards work and where to get help.</p></Reveal><div className="trustGrid"><Reveal delay={.05}><a href="/privacy"><span>01</span><div><h3>Privacy Policy</h3><p>Learn how information may be handled across GAINZOPE services.</p></div><Arrow /></a></Reveal><Reveal delay={.12}><a href="/terms"><span>02</span><div><h3>Terms & conditions</h3><p>Read the rules for using GAINZOPE services.</p></div><Arrow /></a></Reveal><Reveal delay={.19}><a href="/reward-terms"><span>03</span><div><h3>Reward terms</h3><p>Read points, tokens, referrals and eligible redemption rules.</p></div><Arrow /></a></Reveal><Reveal delay={.26}><a href="/support"><span>04</span><div><h3>Support</h3><p>Get help with accounts, rewards, recharge or payment status.</p></div><Arrow /></a></Reveal></div><Reveal delay={.3}><p className="trustNote">Need a hand? Email <a href="mailto:support.gainzope@gmail.com">support.gainzope@gmail.com</a>.</p></Reveal></div></section>;
+function TrustAndSupport({ onNavigate }) {
+  const navigate = (event, href) => {
+    event.preventDefault();
+    onNavigate?.(href);
+  };
+  return <section className="trustSection"><div className="shell"><Reveal className="trustHead"><div><p className="kicker">11 / RULES & SUPPORT</p><h2>Read the rules.<br /><em>Then earn with confidence.</em></h2></div><p>Keep the important information close: how points work, how spin rewards work and where to get help.</p></Reveal><div className="trustGrid"><Reveal delay={.05}><a href="/privacy" onClick={(event) => navigate(event, '/privacy')}><span>01</span><div><h3>Privacy Policy</h3><p>Learn how information may be handled across GAINZOPE services.</p></div><Arrow /></a></Reveal><Reveal delay={.12}><a href="/terms" onClick={(event) => navigate(event, '/terms')}><span>02</span><div><h3>Terms & conditions</h3><p>Read the rules for using GAINZOPE services.</p></div><Arrow /></a></Reveal><Reveal delay={.19}><a href="/reward-terms" onClick={(event) => navigate(event, '/reward-terms')}><span>03</span><div><h3>Reward terms</h3><p>Read points, tokens, referrals and eligible redemption rules.</p></div><Arrow /></a></Reveal><Reveal delay={.26}><a href="/support" onClick={(event) => navigate(event, '/support')}><span>04</span><div><h3>Support</h3><p>Get help with accounts, rewards, recharge or payment status.</p></div><Arrow /></a></Reveal></div><Reveal delay={.3}><p className="trustNote">Need a hand? Email <a href="mailto:support.gainzope@gmail.com">support.gainzope@gmail.com</a>.</p></Reveal></div></section>;
 }
 
 function Download() {
@@ -977,22 +981,8 @@ function Footer({ onNavigate }) {
   };
 
   const handleFooterLink = (e, href) => {
-    if (href === '/about') {
-      e.preventDefault();
-      if (onNavigate) onNavigate('/about');
-      return;
-    }
-    if (window.location.pathname !== '/') {
-      if (href.startsWith('#')) {
-        e.preventDefault();
-        if (onNavigate) onNavigate('/');
-        const hash = href.replace('#', '');
-        setTimeout(() => {
-          const el = document.getElementById(hash);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 60);
-      }
-    }
+    e.preventDefault();
+    if (onNavigate) onNavigate(href.startsWith('#') ? `/${href}` : href);
   };
 
   return (
@@ -1032,13 +1022,13 @@ function Footer({ onNavigate }) {
         <div className="footerLinks">
           <h3>HELP & RULES</h3>
           <a href="#faq" onClick={(e) => handleFooterLink(e, '#faq')}>Frequently asked</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms &amp; Conditions</a>
-          <a href="/reward-terms">Reward Terms</a>
-          <a href="/spin-rules">Spin &amp; Fair-Play Rules</a>
-          <a href="/refund-cancellation">Refund &amp; Cancellation</a>
-          <a href="/support">Support</a>
-          <a href="/account-deletion">Account Deletion</a>
+          <a href="/privacy" onClick={(e) => handleFooterLink(e, '/privacy')}>Privacy Policy</a>
+          <a href="/terms" onClick={(e) => handleFooterLink(e, '/terms')}>Terms &amp; Conditions</a>
+          <a href="/reward-terms" onClick={(e) => handleFooterLink(e, '/reward-terms')}>Reward Terms</a>
+          <a href="/spin-rules" onClick={(e) => handleFooterLink(e, '/spin-rules')}>Spin &amp; Fair-Play Rules</a>
+          <a href="/refund-cancellation" onClick={(e) => handleFooterLink(e, '/refund-cancellation')}>Refund &amp; Cancellation</a>
+          <a href="/support" onClick={(e) => handleFooterLink(e, '/support')}>Support</a>
+          <a href="/account-deletion" onClick={(e) => handleFooterLink(e, '/account-deletion')}>Account Deletion</a>
         </div>
         <div className="footerSocial">
           <h3>STAY IN THE LOOP</h3>
@@ -1146,7 +1136,14 @@ function trackVisitor() {
 }
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+  const [currentPath, setCurrentPath] = useState(() => {
+    const fallbackRoute = new URLSearchParams(window.location.search).get('route');
+    const knownRoutes = new Set(['/about', ...Object.keys(legalPages)]);
+    if (fallbackRoute && knownRoutes.has(fallbackRoute)) {
+      window.history.replaceState({}, '', `${fallbackRoute}${window.location.hash}`);
+    }
+    return window.location.pathname;
+  });
 
   useEffect(() => {
     trackVisitor();
@@ -1158,7 +1155,14 @@ function App() {
   const navigateTo = (path) => {
     window.history.pushState({}, '', path);
     setCurrentPath(path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const hash = window.location.hash.slice(1);
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+    }, 60);
   };
 
   const legacyPaths = {
@@ -1192,7 +1196,7 @@ function App() {
             <RewardPreview />
             <Clarity />
             <WhyChoose />
-            <TrustAndSupport />
+            <TrustAndSupport onNavigate={navigateTo} />
             <SubscribeSection />
             <Download />
             <FAQ />
