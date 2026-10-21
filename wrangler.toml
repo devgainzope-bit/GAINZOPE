@@ -6,4 +6,5 @@ command = "cd gainzope-site && npm install && npm run build"
 
 [assets]
 directory = "./gainzope-site/dist"
+html_handling = "none"
 not_found_handling = "single-page-application"
