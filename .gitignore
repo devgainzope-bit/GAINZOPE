@@ -24,6 +24,7 @@ build/
 .kilo/
 .vscode/
 .idea/
+.wrangler/
 *.log
 
 # OS files

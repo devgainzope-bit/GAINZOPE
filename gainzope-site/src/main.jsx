@@ -11,6 +11,7 @@ import './product-details.css';
 import './performance.css';
 import './subscribe.css';
 import './mobile.css';
+import './app-screens.css';
 import AboutPage from './AboutPage.jsx';
 import LegalPage, { pages as legalPages } from './LegalPage.jsx';
 
@@ -41,7 +42,7 @@ const faqs = [
   ['How do CPX Research paid surveys work?', 'GAINZOPE connects with CPX Research to offer paid surveys tailored for Indian audiences. You will always see the reward value in points and the estimated survey duration before starting.'],
   ['Can I redeem points for gift cards like Amazon or Flipkart?', 'Yes! In addition to mobile recharge discounts, GAINZOPE features an active catalogue of digital gift cards, including Amazon Pay vouchers, Flipkart shopping cards, and Google Play recharge codes.'],
   ['Is GAINZOPE 100% free to join and use?', 'Yes, absolutely free. GAINZOPE does not charge any registration fees, subscriptions, or deposits. You earn rewards strictly through your own time and activity.'],
-  ['When will the GAINZOPE Android app launch on Google Play?', 'The GAINZOPE Android app is coming soon on Google Play for Indian users. Enter your email in our launch alert box to get an instant Day-1 download link as soon as we go live.']
+  ['How do I get the GAINZOPE Android app?', 'You can get the GAINZOPE Android app directly for your phone. Install it to earn points, convert to tokens at 100 pts = ₹1, and enjoy instant recharge discounts across Jio, Airtel, Vi, and BSNL.']
 ];
 
 function Arrow({ down = false }) {
@@ -82,10 +83,10 @@ function Reveal({ children, className = '', delay = 0 }) {
   return (
     <motion.div
       className={`reveal ${className}`}
-      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
       whileInView={reveal}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
@@ -94,47 +95,29 @@ function Reveal({ children, className = '', delay = 0 }) {
 
 function MotionTitle({ title, accent, className = '' }) {
   const reduceMotion = useReducedMotion();
-  const titleWords = title.split(' ');
-  const accentWords = accent ? accent.split(' ') : [];
   return (
     <h2 className={`motionTitle ${className}`} aria-label={`${title} ${accent || ''}`}>
-      <span className="titleLine">
-        {titleWords.map((word, index) => (
-          <React.Fragment key={`t-${word}-${index}`}>
-            <motion.span
-              aria-hidden="true"
-              initial={reduceMotion ? false : { opacity: 0, y: 36 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.8 }}
-              transition={{ duration: 0.45, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="motionWord"
-            >
-              {word}
-            </motion.span>
-            {index < titleWords.length - 1 ? ' ' : ''}
-          </React.Fragment>
-        ))}
-      </span>
+      <motion.span
+        className="titleLine"
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+        transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {title}
+      </motion.span>
       {accent && (
         <>
           <br />
-          <span className="accentLine">
-            {accentWords.map((word, index) => (
-              <React.Fragment key={`a-${word}-${index}`}>
-                <motion.span
-                  aria-hidden="true"
-                  initial={reduceMotion ? false : { opacity: 0, y: 36 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.8 }}
-                  transition={{ duration: 0.45, delay: 0.12 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                  className="motionWord accentWord"
-                >
-                  {word}
-                </motion.span>
-                {index < accentWords.length - 1 ? ' ' : ''}
-              </React.Fragment>
-            ))}
-          </span>
+          <motion.span
+            className="accentLine accentWord"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+            transition={{ duration: 0.42, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {accent}
+          </motion.span>
         </>
       )}
     </h2>
@@ -190,6 +173,122 @@ function AppIcon({ type }) {
   );
 }
 
+function ScreenIcon({ id, size = 18 }) {
+  if (id === 'home') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 10.5L12 3l9 7.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9.5z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    );
+  }
+  if (id === 'missions') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="6" strokeDasharray="3 3" />
+        <circle cx="12" cy="12" r="2" fill="currentColor" />
+        <line x1="12" y1="2" x2="12" y2="4" />
+        <line x1="12" y1="20" x2="12" y2="22" />
+        <line x1="2" y1="12" x2="4" y2="12" />
+        <line x1="20" y1="12" x2="22" y2="12" />
+      </svg>
+    );
+  }
+  if (id === 'spin') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9.5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 2.5v6M12 15.5v6M2.5 12h6M15.5 12h6" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      </svg>
+    );
+  }
+  if (id === 'recharge') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="rgba(200, 255, 0, 0.22)" />
+      </svg>
+    );
+  }
+  if (id === 'wallet') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="2" y="4" width="20" height="16" rx="3" />
+        <line x1="2" y1="9" x2="22" y2="9" />
+        <rect x="6" y="13" width="4" height="3" rx="0.5" fill="currentColor" />
+      </svg>
+    );
+  }
+  if (id === 'refer') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    );
+  }
+  if (id === 'leaderboard') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34" />
+        <path d="M6 4h12v6a6 6 0 0 1-12 0V4z" />
+      </svg>
+    );
+  }
+  if (id === 'profile') {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    );
+  }
+  return null;
+}
+
+function TelecomLogos() {
+  return (
+    <div className="telecomBadgesRow" aria-label="Supported Indian telecom networks for recharge discounts">
+      <div className="telecomPill jioPill">
+        <span className="telecomCircle jioCircle">Jio</span>
+        <div>
+          <b>Reliance Jio</b>
+          <small>Instant Discount</small>
+        </div>
+      </div>
+      <div className="telecomPill airtelPill">
+        <span className="telecomCircle airtelCircle">airtel</span>
+        <div>
+          <b>Bharti Airtel</b>
+          <small>Instant Discount</small>
+        </div>
+      </div>
+      <div className="telecomPill viPill">
+        <span className="telecomCircle viCircle">Vi</span>
+        <div>
+          <b>Vodafone Idea</b>
+          <small>Instant Discount</small>
+        </div>
+      </div>
+      <div className="telecomPill bsnlPill">
+        <span className="telecomCircle bsnlCircle">BSNL</span>
+        <div>
+          <b>BSNL Mobile</b>
+          <small>Instant Discount</small>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 function Nav({ currentPath, onNavigate }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -230,8 +329,7 @@ function Nav({ currentPath, onNavigate }) {
           ))}
         </nav>
         <div className="navActions">
-          <a className="navAlertBtn" href="/#subscribe" onClick={(e) => handleLinkClick(e, '#subscribe')}><span className="pulseDot" /> Get Launch Alert</a>
-          <a className="navCta" href="/#download" onClick={(e) => handleLinkClick(e, '#download')}>App coming soon <Arrow /></a>
+          <a className="navCta" href="/#download" onClick={(e) => handleLinkClick(e, '#download')}>Get GAINZOPE App <Arrow /></a>
         </div>
         <button
           className={`menuButton ${open ? 'open' : ''}`}
@@ -255,14 +353,14 @@ function Nav({ currentPath, onNavigate }) {
             aria-label="Mobile navigation"
           >
             <div className="mobileMenuInner">
-              <a className="mobileAlertLink" href="/#subscribe" onClick={(e) => handleLinkClick(e, '#subscribe')}>
+              <a className="mobileAlertLink" href="/#download" onClick={(e) => handleLinkClick(e, '#download')}>
                 <div className="mobileAlertLeft">
                   <div className="mobileAlertBadge">
                     <span className="mobileAlertDot" />
-                    <span>LAUNCH NOTIFICATIONS</span>
+                    <span>OFFICIAL ANDROID APP</span>
                   </div>
-                  <strong>Get Day-1 Android Link</strong>
-                  <small>Receive instant alert on Google Play release</small>
+                  <strong>Install GAINZOPE App</strong>
+                  <small>Daily lucky spins, CPX surveys &amp; recharge savings</small>
                 </div>
                 <span className="mobileAlertArrow"><Arrow /></span>
               </a>
@@ -290,7 +388,7 @@ function Nav({ currentPath, onNavigate }) {
                   <div className="mobileAppIcon">G</div>
                   <div className="mobileAppInfo">
                     <div className="mobileAppTitle">GAINZOPE for Android</div>
-                    <span className="mobileAppStatus">COMING SOON · INDIA ONLY</span>
+                    <span className="mobileAppStatus">OFFICIAL APP · GET IT NOW</span>
                   </div>
                   <Arrow />
                 </a>
@@ -309,7 +407,33 @@ function Nav({ currentPath, onNavigate }) {
 }
 
 function DemoPhone() {
-  return <motion.div className="heroPhone" initial={{ opacity: 0, rotate: 9, y: 28 }} animate={{ opacity: 1, rotate: 4, y: 0 }} transition={{ duration: .8, ease: [0.22, 0.7, 0.2, 1] }}><div className="phoneNotch" /><div className="phoneScreen"><div className="phoneTop"><span>GAINZOPE</span><b>•••</b></div><div className="phoneHello"><small>GOOD TO SEE YOU</small><strong>Your activity<br />has value.</strong></div><div className="balanceCard"><div><small>SAMPLE BALANCE</small><strong>2,480 <i>PTS</i></strong></div><span className="balanceSpark">✦</span><div className="balanceProgress"><span /></div><p><b>120 pts</b> from your next milestone</p></div><div className="phoneLabel"><span>APP PREVIEW</span><b>Ways to earn</b></div><div className="phoneActivities"><span><i>◎</i> Quick survey <b>+120</b></span><span><i>◇</i> Explore an offer <b>+80</b></span></div><div className="phoneNav"><span>Home</span><span>Earn</span><span>Wallet</span></div></div></motion.div>;
+  return (
+    <motion.div
+      className="heroPhone realDevice"
+      initial={{ opacity: 0, rotate: 8, y: 24 }}
+      animate={{ opacity: 1, rotate: 3, y: 0 }}
+      whileHover={{ rotate: 0, scale: 1.02 }}
+      transition={{ duration: 0.8, ease: [0.22, 0.7, 0.2, 1] }}
+    >
+      <div className="phoneDeviceFrame">
+        <div className="phonePunchhole" />
+        <div className="phoneInnerScreen">
+          <img
+            src="/images/app-home.png"
+            alt="GAINZOPE Android App Home Dashboard Screen with live points and quick actions"
+            width="290"
+            height="620"
+            loading="eager"
+          />
+          <div className="phoneScreenGlass" />
+        </div>
+      </div>
+      <div className="liveAppBadge">
+        <span className="liveDotSmall" />
+        <span>ACTUAL ANDROID APP UI</span>
+      </div>
+    </motion.div>
+  );
 }
 
 function Hero() {
@@ -337,7 +461,7 @@ function Hero() {
           <span>02</span><b>REDEEM</b><small>Use tokens on eligible rewards</small>
         </motion.div>
         <DemoPhone />
-        <p className="demoCaption">APP PREVIEW <span>SAMPLE BALANCE</span></p>
+        <p className="demoCaption">GAINZOPE ANDROID APP <span>LIVE PREVIEW</span></p>
       </div>
     </section>
   );
@@ -386,11 +510,288 @@ function HomeAboutIntro({ onNavigateAbout }) {
   );
 }
 
+const appScreensData = [
+  {
+    id: 'home',
+    name: 'Home',
+    badge: '01 / MAIN DASHBOARD',
+    title: 'Your daily hub for',
+    accent: 'points & instant recharge.',
+    desc: 'The official home screen lets you track your 100 PTS = ₹1.00 token conversion rate, check VIP Bronze status, and jump straight into recharge or daily check-ins.',
+    image: '/images/app-home.png',
+    alt: 'GAINZOPE Android App Home Dashboard Screen',
+    highlights: [
+      { title: 'Live Rewards Balance', text: 'Real-time points (665 pts ≈ 6.7 tokens) and instant rupee conversion value' },
+      { title: 'Bronze Starter VIP Badge', text: 'Automatic tier discount eligibility displayed right at the top' },
+      { title: 'Quick Action Hub', text: '1-tap shortcuts for Mobile Recharge, Token Convert, Daily Rewards, and Refer & Earn' }
+    ]
+  },
+  {
+    id: 'missions',
+    name: 'Missions',
+    badge: '02 / EARNING ENGINE',
+    title: 'Complete missions,',
+    accent: 'accelerate your points.',
+    desc: 'Daily targets, streak multipliers, CPX Research verified surveys, and partner offers all credit directly to your verified ledger.',
+    image: '/images/app-missions.png',
+    alt: 'GAINZOPE App Reward Missions and Daily Targets',
+    highlights: [
+      { title: '5-Day Streak Active', text: '1.2x VIP Booster automatically multiplies points earned across all activities' },
+      { title: 'Daily Mission Target', text: 'Progress bar tracks your 1,000 pts target with instant credit' },
+      { title: 'Tasks & CPX Surveys', text: 'Choose between 5 verified partner offers and 5 tailored Indian audience surveys' }
+    ]
+  },
+  {
+    id: 'spin',
+    name: 'Lucky Spin',
+    badge: '03 / DAILY FREE SPIN',
+    title: 'One free spin.',
+    accent: 'Every single midnight IST.',
+    desc: 'Every verified GAINZOPE account gets a guaranteed free spin each calendar day with up to 200 points on the wheel.',
+    image: '/images/app-spin.png',
+    alt: 'GAINZOPE Lucky Spin Wheel Screen',
+    highlights: [
+      { title: 'IST Midnight Reset', text: 'Daily allowance resets at 12:00 AM IST sharp with live countdown timer' },
+      { title: 'Prizes Up to 200 PTS', text: 'Win 10, 25, 35, 50, 75, 100, 150, or 200 points on the verified fair wheel' },
+      { title: 'VIP Spin Boosts', text: 'Higher VIP tiers and active streaks unlock 2 to 5 bonus spins every day' }
+    ]
+  },
+  {
+    id: 'recharge',
+    name: 'Recharge',
+    badge: '04 / DISCOUNT CHECKOUT',
+    title: 'Real discounts on',
+    accent: 'Jio, Airtel, Vi & BSNL.',
+    desc: 'Select your mobile operator, auto-detect your circle, and apply up to 75 tokens for an instant ₹75 discount on popular unlimited plans.',
+    image: '/images/app-recharge.png',
+    alt: 'GAINZOPE Mobile Recharge Screen with Vi Plan Discount',
+    highlights: [
+      { title: 'Instant Auto-Detect', text: 'Seamlessly recognizes your Indian operator and telecom circle' },
+      { title: 'Direct Token Deduction', text: 'Applies 1 Token = ₹1 discount right before payment (e.g. ₹299 plan with ₹25+ tokens)' },
+      { title: 'Verified Telecom Directory', text: 'Real-time verified plan catalogue with daily data, SMS, and OTT inclusions' }
+    ]
+  },
+  {
+    id: 'wallet',
+    name: 'Wallet',
+    badge: '05 / RECHARGE VAULT',
+    title: 'GAINZOPE Pay.',
+    accent: 'Titanium smart vault.',
+    desc: 'Your virtual card and passbook. Convert reward points to usable tokens in increments of 100, 500, 1,000 or MAX with zero fees.',
+    image: '/images/app-wallet.png',
+    alt: 'GAINZOPE Pay Titanium Vault Screen with Point-to-Token Slider',
+    highlights: [
+      { title: 'Titanium Virtual Card', text: 'Secure encrypted passbook showing total estimated balance and cardholder info' },
+      { title: '1-Tap Point Converter', text: 'Slide to convert 100 pts (₹1) up to MAX available points in seconds' },
+      { title: 'Split Balance View', text: 'Distinguishes between instantly usable tokens and convertible reward points' }
+    ]
+  },
+  {
+    id: 'refer',
+    name: 'Refer & Earn',
+    badge: '06 / REFERRAL PROGRAM',
+    title: 'Invite friends, earn',
+    accent: '+500 PTS per join.',
+    desc: 'Share your private referral code GZHF9HM. Give a ₹2.00 welcome gift (200 pts) to friends, and receive ₹5.00 (500 pts) credited directly to your balance.',
+    image: '/images/app-refer.png',
+    alt: 'GAINZOPE Refer & Earn Screen with Referral Code GZHF9HM',
+    highlights: [
+      { title: '₹5.00 Per Friend (+500 PTS)', text: 'Instant credit as soon as your invited friend finishes their first verified task' },
+      { title: 'Friend Gets 200 PTS', text: '₹2.00 instant welcome gift credited to your friend upon sign-up' },
+      { title: '1-Tap Sharing Hub', text: 'Instant sharing via WhatsApp (+500 PTS), Telegram, SMS, or private QR code' }
+    ]
+  },
+  {
+    id: 'leaderboard',
+    name: 'Leaderboard',
+    badge: '07 / COMMUNITY STANDINGS',
+    title: 'Compete, rank up,',
+    accent: 'claim bonus pool prizes.',
+    desc: 'Climb the daily, 7-day, and all-time leaderboard standings. Top earners and top referrers unlock exclusive bonus token drops and milestone rewards.',
+    image: '/images/app-leaderboard.png',
+    alt: 'GAINZOPE Leaderboard Standings Screen',
+    highlights: [
+      { title: 'Live Standings', text: 'Real-time ranking tracking Today, Last 7 Days, and All-Time points earned' },
+      { title: 'Top Podium Rewards', text: 'Top podium finishers unlock bonus mystery boxes and tier multipliers' },
+      { title: 'Verified Transparent Tally', text: 'Pure activity-based scores calculated strictly from verified ledgers' }
+    ]
+  },
+  {
+    id: 'profile',
+    name: 'Member Identity',
+    badge: '08 / VERIFIED MEMBER ID',
+    title: 'Encrypted member ID,',
+    accent: 'VIP tier progression.',
+    desc: 'Your personal GAINZOPE Identity hub. Track your 256-bit secure ledger, manage instant UPI payouts, and monitor your progression to Silver Pro.',
+    image: '/images/app-profile.png',
+    alt: 'GAINZOPE Member Identity and Tier Status Screen',
+    highlights: [
+      { title: 'Verified Member Tier 1', text: 'Bronze Starter privileges including 2 daily spins and standard token rates' },
+      { title: 'Silver Pro Progression', text: 'Track exact points needed to level up and unlock higher 8% recharge discounts' },
+      { title: 'Bank-Grade Security', text: '256-Bit Ledger, Instant UPI transfers, and 100% Zero Data Sale guarantee' }
+    ]
+  }
+];
 
+function AppScreenTour() {
+  const [activeTab, setActiveTab] = useState(0);
+  const current = appScreensData[activeTab];
+
+  return (
+    <section className="appTourSection" id="app-preview">
+      <div className="tourAura" aria-hidden="true" />
+      <div className="shell">
+        <Reveal className="tourHeader">
+          <p className="kicker"><span className="liveDot" /> LIVE APP SCREEN TOUR</p>
+          <h2>Inside GAINZOPE.<br /><em>Crafted for effortless savings.</em></h2>
+          <p>
+            Here is an authentic preview of the GAINZOPE Android app. Select any screen below to explore how daily tasks, lucky spins, recharge discounts, and token conversions work.
+          </p>
+        </Reveal>
+
+        <div className="tourTabRow">
+          {appScreensData.map((screen, idx) => (
+            <button
+              key={screen.id}
+              type="button"
+              className={`tourTabBtn ${activeTab === idx ? 'active' : ''}`}
+              onClick={() => setActiveTab(idx)}
+              aria-label={`View ${screen.name} screen`}
+            >
+              <span className="tabGlyph">
+                <ScreenIcon id={screen.id} size={15} />
+              </span>
+              <span>{screen.name}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="tourDisplayGrid">
+          <div className="tourDeviceCol">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                className="phoneDeviceFrame"
+                initial={{ opacity: 0, y: 16, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -16, scale: 0.97 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="phonePunchhole" />
+                <div className="phoneInnerScreen">
+                  <img
+                    src={current.image}
+                    alt={current.alt}
+                    loading="lazy"
+                    width="300"
+                    height="640"
+                  />
+                  <div className="phoneScreenGlass" />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="tourInfoCol">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <span className="tourScreenBadge">{current.badge}</span>
+                <h3>
+                  {current.title} <span>{current.accent}</span>
+                </h3>
+                <p className="tourScreenDesc">{current.desc}</p>
+
+                <ul className="tourPointsList">
+                  {current.highlights.map((h, i) => (
+                    <li key={i} className="tourPointItem">
+                      <span className="tourPointIcon">
+                        <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <polyline points="4 10 8 14 16 6" />
+                        </svg>
+                      </span>
+                      <div className="tourPointText">
+                        <strong>{h.title}</strong>
+                        <span>{h.text}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="tourNextTag">⚡ MORE REAL APP SCREENS ADDED REGULARLY</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function ReferralRewards() {
-  const milestones = [['10', '1,500 points'], ['25', '5,000 points'], ['50', '15,000 points']];
-  return <section className="referralSection"><div className="shell referralGrid"><Reveal><p className="kicker">03 / REFER & EARN</p><h2>Invite a friend.<br /><em>Unlock points together.</em></h2><p>Share your referral code. When your friend completes their first valid task, GAINZOPE credits a reward to both accounts.</p><div className="referralSplit"><div><small>YOUR REWARD</small><strong>500 <i>PTS</i></strong></div><div><small>FRIEND'S REWARD</small><strong>200 <i>PTS</i></strong></div></div><p className="referralFine">A referral counts only after that first task is verified. Up to 10 successful referrals can count in one day.</p></Reveal><Reveal delay={.12} className="milestoneBoard"><div className="milestoneHead"><span>REFERRAL MILESTONES</span><b>EXTRA POINTS</b></div>{milestones.map(([count, points], index) => <motion.div key={count} className="milestoneRow" whileHover={{ x: 7 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }}><span>0{index + 1}</span><strong><b>{count}</b> successful referrals</strong><em>+ {points}</em></motion.div>)}<div className="milestoneFoot"><span>DAILY LIMIT</span><b>10 REFERRALS</b></div></Reveal></div></section>;
+  const [copied, setCopied] = useState(false);
+  const copyCode = () => {
+    try {
+      navigator.clipboard?.writeText('GZHF9HM');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {}
+  };
+
+  return (
+    <section className="referralSection" id="refer">
+      <div className="shell referralGrid">
+        <Reveal>
+          <p className="kicker">03 / REFER & EARN</p>
+          <h2>Invite a friend.<br /><em>Unlock points together.</em></h2>
+          <p>Share your private referral code. When your friend joins and finishes their first valid task, GAINZOPE credits a real reward to both accounts.</p>
+
+          <div className="referralSplit">
+            <div>
+              <small>YOUR REWARD</small>
+              <strong>500 <i>PTS</i></strong>
+              <span style={{ fontSize: '11px', color: '#adb2a5', display: 'block', marginTop: '4px' }}>₹5.00 Direct Cash Value</span>
+            </div>
+            <div>
+              <small>FRIEND'S REWARD</small>
+              <strong>200 <i>PTS</i></strong>
+              <span style={{ fontSize: '11px', color: '#adb2a5', display: 'block', marginTop: '4px' }}>₹2.00 Welcome Gift</span>
+            </div>
+          </div>
+
+          <div className="referralCodeBox">
+            <div>
+              <small>YOUR PRIVATE REFERRAL CODE</small>
+              <strong>GZHF9HM</strong>
+            </div>
+            <button type="button" className="referralCopyBtn" onClick={copyCode}>
+              {copied ? '✓ COPIED' : 'COPY CODE'}
+            </button>
+          </div>
+
+          <p className="referralFine">Share instantly via WhatsApp, Telegram, or SMS. Milestone bonuses (+1,500 pts at 10, +5,000 pts at 25, +15,000 pts at 50 friends) unlock automatically.</p>
+        </Reveal>
+
+        <Reveal delay={.12} className="referralPosterWrapper">
+          <div className="promoPosterCard">
+            <img
+              src="/images/promo-refer-earn.jpg"
+              alt="Invite Friends, Earn Rewards on GAINZOPE - 500 PTS for you, 200 PTS for friend"
+              className="promoPosterImg"
+              loading="lazy"
+              width="420"
+              height="750"
+            />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
 }
 
 function SpinAndRecharge() {
@@ -399,35 +800,54 @@ function SpinAndRecharge() {
       <Reveal className="spinCard">
         <p className="kicker">04 / SPIN REWARDS</p>
         <h2>A free spin.<br /><em>Once a day.</em></h2>
-        <p>Every eligible GAINZOPE account gets one free daily spin, reset on Indian Standard Time.</p>
-        <div className="spinDial">
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}>
-            <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
-              <circle cx="32" cy="32" r="29" fill="#0d0e0b" stroke="#c9ff00" strokeWidth="3" />
-              <circle cx="32" cy="32" r="7" fill="#c9ff00" />
-              <line x1="32" y1="3" x2="32" y2="61" stroke="#c9ff00" strokeWidth="2" />
-              <line x1="3" y1="32" x2="61" y2="32" stroke="#c9ff00" strokeWidth="2" />
-              <line x1="11.5" y1="11.5" x2="52.5" y2="52.5" stroke="#c9ff00" strokeWidth="2" />
-              <line x1="11.5" y1="52.5" x2="52.5" y2="11.5" stroke="#c9ff00" strokeWidth="2" />
-              <circle cx="32" cy="11" r="2.5" fill="#ffffff" />
-              <circle cx="32" cy="53" r="2.5" fill="#ffffff" />
-              <circle cx="11" cy="32" r="2.5" fill="#ffffff" />
-              <circle cx="53" cy="32" r="2.5" fill="#ffffff" />
-            </svg>
-          </motion.div>
-          <i>FREE SPIN<br />DAILY</i>
+        <p>Every eligible GAINZOPE account gets one free daily spin, resetting at 12:00 AM Indian Standard Time.</p>
+
+        <div className="spinCardVisual">
+          <div className="phoneDeviceFrame">
+            <div className="phonePunchhole" />
+            <div className="phoneInnerScreen">
+              <img
+                src="/images/app-spin.png"
+                alt="GAINZOPE Lucky Spin Wheel interface resetting 12:00 AM IST with 200 PTS top prize"
+                loading="lazy"
+                width="220"
+                height="470"
+              />
+              <div className="phoneScreenGlass" />
+            </div>
+          </div>
         </div>
+
         <ul>
-          <li>Complete valid tasks to unlock bonus spins</li>
-          <li>Reach milestones to earn extra spins</li>
-          <li>Find Mystery Box rewards in the spin experience</li>
+          <li><strong>1 Free Daily Spin:</strong> Resets every midnight at 12:00 AM IST sharp for all active members</li>
+          <li><strong>Win up to 200 PTS:</strong> Verified points added instantly to your wallet ledger</li>
+          <li><strong>5-Day Streaks:</strong> Active daily check-in unlocks 1.2x VIP booster and bonus spins</li>
         </ul>
-        <a href="/reward-rules.html">Read spin rules <Arrow /></a>
+        <a href="/spin-rules">Read spin rules <Arrow /></a>
       </Reveal>
+
       <Reveal delay={.12} className="rechargeCard">
         <p className="kicker">05 / RECHARGE DISCOUNTS &amp; TOKENS</p>
         <h2>Make your next<br /><em>recharge cost less.</em></h2>
         <p>Sign in with an Indian mobile number, unlock Bronze level for a 5% discount, and apply your verified tokens on Jio, Airtel, Vi or BSNL.</p>
+        <TelecomLogos />
+
+        <div className="rechargeCardVisual">
+          <div className="phoneDeviceFrame">
+            <div className="phonePunchhole" />
+            <div className="phoneInnerScreen">
+              <img
+                src="/images/app-recharge.png"
+                alt="GAINZOPE Mobile Recharge Screen showing Vi Prepaid ₹299 plan with token discount"
+                loading="lazy"
+                width="220"
+                height="470"
+              />
+              <div className="phoneScreenGlass" />
+            </div>
+          </div>
+        </div>
+
         <div className="rechargeExample">
           <div><small>RECHARGE PLAN</small><b>{'\u20B9'}299</b></div>
           <span>−</span>
@@ -437,7 +857,7 @@ function SpinAndRecharge() {
           <span>=</span>
           <div className="finalRecharge"><small>YOU PAY</small><b>{'\u20B9'}264</b></div>
         </div>
-        <p className="rechargeFine">Example: Bronze level 5% off + tokens deducted before payment. Silver gives 8%, Gold 12%, Platinum 15%.</p>
+        <p className="rechargeFine">Live App Screenshot: Vi 4G GIGANet Delhi NCR plan with ₹25+ token deduction before payment. Tier savings scale up to 15% on Platinum.</p>
       </Reveal>
     </section>
   );
@@ -554,7 +974,47 @@ function RewardDestinations() {
 }
 
 function RewardPreview() {
-  return <section id="rewards" className="rewardsSection"><div className="shell rewardsGrid"><Reveal className="rewardCopy"><p className="kicker">08 / YOUR GAINZOPE WALLET</p><h2>Know what is<br /><em>ready to use.</em></h2><p>Your wallet keeps points, tokens and activity status in one place, so you know what is pending, what is credited and what can be redeemed.</p><ul><li><span>01</span> Track activities in progress or under review</li><li><span>02</span> See verified points and available tokens</li><li><span>03</span> Check eligible recharge and gift-card rewards</li></ul></Reveal><Reveal delay={.12} className="walletPreview"><motion.div className="walletShell" whileHover={{ rotateX: 2, rotateY: -3 }} transition={{ type: 'spring', stiffness: 150, damping: 17 }}><div className="walletHeader"><span>GAINZOPE WALLET</span><b>PREVIEW</b></div><div className="walletBalance"><small>SAMPLE POINTS</small><strong>2,480 <i>PTS</i></strong><span>Example balance for preview</span></div><div className="walletMeter"><div><span>VERIFIED POINTS</span><b>2,480</b></div><div className="meter"><span /></div><small>Every 100 verified points converts to 1 token.</small></div><div className="walletRows"><div><span><i className="greenDot" /> Survey credited</span><b>+120 PTS</b></div><div><span><i className="greenDot" /> Task under review</span><b>PENDING</b></div></div><div className="rewardStatus"><div><small>READY TO USE</small><b>Check rewards in the app</b></div><Arrow /></div></motion.div></Reveal></div></section>;
+  return (
+    <section id="rewards" className="rewardsSection">
+      <div className="shell rewardsGrid">
+        <Reveal className="rewardCopy">
+          <p className="kicker">08 / YOUR GAINZOPE WALLET</p>
+          <h2>Know what is<br /><em>ready to use.</em></h2>
+          <p>Your wallet keeps points, tokens and activity status in one place, so you know what is pending, what is credited and what can be redeemed.</p>
+          <ul>
+            <li><span>01</span> <strong>Titanium Vault:</strong> Live encrypted wallet tracking usable tokens &amp; reward points</li>
+            <li><span>02</span> <strong>Transparent Value:</strong> Exactly 100 points = 1 token (₹1 direct redemption power)</li>
+            <li><span>03</span> <strong>1-Tap Conversion:</strong> Slide to convert points to tokens instantly with zero fees</li>
+          </ul>
+        </Reveal>
+        <Reveal delay={.12} className="walletPreview">
+          <motion.div className="walletShell realWalletFrame" whileHover={{ rotateX: 2, rotateY: -3 }} transition={{ type: 'spring', stiffness: 150, damping: 17 }}>
+            <div className="walletHeader">
+              <span>GAINZOPE PAY · SMART RECHARGE VAULT</span>
+              <b>TITANIUM VIRTUAL</b>
+            </div>
+            <div className="walletImageFrame">
+              <img
+                src="/images/app-wallet.png"
+                alt="GAINZOPE Pay Titanium Vault wallet balance and instant point-to-token converter"
+                className="walletScreenImg"
+                loading="lazy"
+                width="340"
+                height="700"
+              />
+            </div>
+            <div className="rewardStatus" style={{ marginTop: '16px' }}>
+              <div>
+                <small>CONVERT POINTS TO TOKENS</small>
+                <b>100 Points = 1 Token (₹1.00 Discount)</b>
+              </div>
+              <Arrow />
+            </div>
+          </motion.div>
+        </Reveal>
+      </div>
+    </section>
+  );
 }
 
 function Clarity() {
@@ -885,35 +1345,41 @@ function Download() {
       <div className="shell downloadGrid">
         <Reveal>
           <p className="kicker">13 / THE GAINZOPE APP</p>
-          <h2>GAINZOPE for<br /><em>Android is coming soon.</em></h2>
+          <h2>Get GAINZOPE.<br /><em>Start saving on recharge today.</em></h2>
           <p>Sign in with your Indian mobile number and easily keep track of your activities, points, tokens and eligible rewards in one place.</p>
-          <span className="comingButton">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" className="playSymbol">
+          <a
+            className="appDownloadBtn"
+            href="#subscribe"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('subscribe')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" className="playSymbol">
               <path d="M3.6 2.4c-.4.4-.6 1-.6 1.8v15.6c0 .8.2 1.4.6 1.8L12.5 12 3.6 2.4z" fill="#00D2FF" />
               <path d="M15.5 9.1L4.8 3.1C4.3 2.8 3.9 2.8 3.6 3L12.5 12l3-2.9z" fill="#00F076" />
               <path d="M15.5 14.9L12.5 12l-8.9 9c.3.2.7.2 1.2-.1l10.7-6z" fill="#FF3A44" />
               <path d="M20.1 11.2l-4.6-2.6-3 3.4 3 3.4 4.6-2.6c.9-.5.9-1.2 0-1.6z" fill="#FFC800" />
             </svg>
             <span>
-              <small>GAINZOPE FOR ANDROID</small>
-              <b>COMING SOON</b>
+              <small>OFFICIAL GAINZOPE ANDROID APP</small>
+              <b>GET THE ANDROID APP</b>
             </span>
             <Arrow />
-          </span>
+          </a>
+          <p className="downloadMetaPill">VERIFIED ANDROID BUILD · 100% FREE · MADE FOR INDIA</p>
         </Reveal>
-        <Reveal delay={.1} className="downloadVisual">
-          <div className="downloadRings">
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 24, repeat: Infinity, ease: 'linear' }} />
-            <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }} />
+        <Reveal delay={.1} className="downloadPosterWrapper">
+          <div className="promoPosterCard">
+            <img
+              src="/images/promo-all-in-one.jpg"
+              alt="GAINZOPE Rewards, All in One Place - Earn points, explore rewards, save on recharge"
+              className="promoPosterImg"
+              loading="lazy"
+              width="420"
+              height="750"
+            />
           </div>
-          <motion.div className="downloadCoin" animate={{ y: [0, -10, 0], rotate: [0, 4, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
-            <svg viewBox="0 0 88 88" width="84" height="84" fill="none" aria-hidden="true">
-              <circle cx="44" cy="44" r="40" fill="#10110e" stroke="#c8ff00" strokeWidth="4" />
-              <circle cx="44" cy="44" r="32" stroke="rgba(200, 255, 0, 0.45)" strokeDasharray="5 3" strokeWidth="2" />
-              <path d="M49 28h-9a9 9 0 0 0-9 9v14a9 9 0 0 0 9 9h9a9 9 0 0 0 9-9v-5h-10" stroke="#c8ff00" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.div>
-          <span>INDIA ONLY · ENGLISH INTERFACE<br />LAUNCH UPDATES COMING SOON</span>
         </Reveal>
       </div>
     </section>
@@ -1001,9 +1467,9 @@ function Footer({ onNavigate }) {
         <div className="footerBrand">
           <Logo onNavigate={onNavigate} />
           <p>Earn points. Save on what matters.</p>
-          <small>Spin rewards, surveys, tasks, offers, referrals, gift cards and eligible recharge discounts in one upcoming app.</small>
+          <small>Spin rewards, surveys, tasks, offers, referrals, gift cards and eligible recharge discounts in the GAINZOPE Android app.</small>
           <a className="footerContactLink" href="mailto:support.gainzope@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
             </svg>
@@ -1028,7 +1494,7 @@ function Footer({ onNavigate }) {
           <a href="/spin-rules" onClick={(e) => handleFooterLink(e, '/spin-rules')}>Spin &amp; Fair-Play Rules</a>
           <a href="/refund-cancellation" onClick={(e) => handleFooterLink(e, '/refund-cancellation')}>Refund &amp; Cancellation</a>
           <a href="/support" onClick={(e) => handleFooterLink(e, '/support')}>Support</a>
-          <a href="/account-deletion" onClick={(e) => handleFooterLink(e, '/account-deletion')}>Account Deletion</a>
+          <a href="/account-deletion" onClick={(e) => handleFooterLink(e, '/account-deletion')}>Request Account Deletion</a>
         </div>
         <div className="footerSocial">
           <h3>STAY IN THE LOOP</h3>
@@ -1060,12 +1526,12 @@ function Footer({ onNavigate }) {
       <div className="shell footerBottom">
         <span>© {new Date().getFullYear()} GAINZOPE. All rights reserved.</span>
         <div className="footerSecurityBadge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           <span>SSL Secured · Made for India</span>
         </div>
-        <span>gainzope.in <b>·</b> Android app coming soon</span>
+        <span>gainzope.in <b>·</b> Official GAINZOPE Android App</span>
       </div>
     </footer>
   );
@@ -1181,7 +1647,7 @@ function App() {
         {isAbout ? (
           <AboutPage onBackToHome={() => navigateTo('/')} />
         ) : isLegal ? (
-          <LegalPage path={routePath} />
+          <LegalPage path={routePath} onNavigate={navigateTo} />
         ) : (
           <>
             <Hero />
@@ -1189,6 +1655,7 @@ function App() {
             <Journey />
             <EarnWays />
             <HomeAboutIntro onNavigateAbout={() => navigateTo('/about')} />
+            <AppScreenTour />
             <ReferralRewards />
             <SpinAndRecharge />
             <ValueExchange />

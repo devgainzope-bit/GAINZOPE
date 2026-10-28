@@ -35,7 +35,6 @@ body {
 .motionTitle .motionWord {
   display: inline-block;
   margin-right: 0.24em;
-  will-change: transform, opacity;
 }
 
 .motionTitle .motionWord:last-child {

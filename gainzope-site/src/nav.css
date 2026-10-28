@@ -83,14 +83,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 18px;
+  flex-wrap: nowrap !important;
 }
 
 .desktopNav a {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
+  padding: 8px 12px;
   font-family: var(--sans);
   font-size: 13.5px;
   font-weight: 550;
@@ -98,6 +99,9 @@
   color: #484b43;
   text-decoration: none !important;
   border-radius: 8px;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -490,28 +494,21 @@
   color: var(--lime);
 }
 
-@media (min-width: 1121px) and (max-width: 1240px) {
+@media (min-width: 1041px) and (max-width: 1260px) {
   .desktopNav {
-    gap: 12px;
+    gap: 10px;
   }
   .desktopNav a {
     padding: 6px 10px;
     font-size: 13px;
   }
-  .navActions {
-    gap: 8px;
-  }
-  .navAlertBtn {
-    padding: 8px 12px;
-    font-size: 11px;
-  }
   .navCta {
-    padding: 8px 12px;
+    padding: 9px 16px;
     font-size: 11px;
   }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1040px) {
   .desktopNav {
     display: none !important;
   }
